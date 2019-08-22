@@ -22,7 +22,7 @@ L.marker([51.5, -0.09]).addTo(mymap)
     .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
     .openPopup(); 
     // THIS IS NEW
-    var promise = $.getJSON("businesses.json");
+    var promise = $.getJSON("pubs.json");
     promise.then(function(data) {
         //do a bunch of stuff here
         console.log(data) // take a look at the data in the console
